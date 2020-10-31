@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>coron track app</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div class="container dashboard">
+
+        
+        
+    </div>
+
+    <script src="jquery.min.js"></script>
+<script>
+    $(function(){
+        let url="https://api.covid19api.com/summary"
+        function makeStateBlock({name,count}) {
+            return `<div class="card summary">
+                <h3 class="card-title text-centre">${name}</h3>
+                <p class="total-recover-stat text-center p-5">${count}</p>
+            </div>`
+        }
+        const dashboard = $('.dashboard')
+        $.get(url,function(d) {
+            let stats=d.Global
+            let htmlstring=""
+            for(let [name,count] of Object.entries(stats)){
+                console.log(stats)
+                const stat_html=makeStateBlock({name,count} )
+                htmlstring+=stat_html
+            }
+            dashboard.html(htmlstring)
+            
+        })
+    })
+
+</script>
+    
+</body>
+</html>
